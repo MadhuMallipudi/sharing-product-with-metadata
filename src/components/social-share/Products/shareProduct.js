@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import {FacebookShareButton,WhatsappShareButton,WhatsappIcon,FacebookIcon} from "react-share";
 
-import { Grid,Container, Box, Button, Typography, Popover} from '@mui/material'; 
-import Header from "../../common/Header";
-import image from "../../../assets/images/logo512.png";
+import { Grid} from '@mui/material'; 
+// import Header from "../../common/Header";
+import alt_pic from "../../../assets/images/logo512.png";
 // import WhatsappIcon from "./icons/whatsAppIcon";
 import {selectedProduct} from "../../../redux/actions/commonAction"
 import {useParams} from "react-router-dom";
@@ -14,9 +14,12 @@ const ShareProduct = () => {
     const product =  useSelector(state => state.commonReducer.selectedProduct);
     const {id} = useParams();
     const dispatchAction = useDispatch()
-    useEffect(async ()=>{
-        await dispatchAction(selectedProduct(id));
-    },[])
+    useEffect(()=>{
+        const getProduct = async () => {
+            await dispatchAction(selectedProduct(id));
+        }
+        getProduct();
+    },[id,dispatchAction])
     return (
         <>
            {
@@ -30,7 +33,7 @@ const ShareProduct = () => {
                 >
                 </HelmetMetaData>
                 <Grid item lg={6} md={6} xs={12} >
-                    <img width={250} height={250} src={product?.image ? product?.image : image }  />
+                    <img width={250} height={250} alt="no pic" src={product?.image ? product?.image : alt_pic }  />
                 </Grid>
                 <Grid item lg={6} md={6} xs={12} sx={{mt:5}} >
                     <div className="title">
@@ -41,8 +44,8 @@ const ShareProduct = () => {
                     </div>
                     <div className="share-blk">
                         <WhatsappShareButton
-                                url={shareUrl}
-                                // url={"https://kind-shockley-0c5461.netlify.app/"}
+                                // url={shareUrl}
+                                url={"https://monumental-muffin-4b1dbb.netlify.app/"}
                                 title={product.title}
                                 separator="::"
                                 className="Demo__some-network__share-button"
@@ -51,8 +54,8 @@ const ShareProduct = () => {
                         </WhatsappShareButton>
 
                         <FacebookShareButton
-                                // url={"https://kind-shockley-0c5461.netlify.app/"}
-                                url={shareUrl}
+                                url={"https://monumental-muffin-4b1dbb.netlify.app/"}
+                                // url={"shareUrl"}
                                 quote="product info"
                                 title={product.title}
                                 hashtag ={ `#${product.title}`}
