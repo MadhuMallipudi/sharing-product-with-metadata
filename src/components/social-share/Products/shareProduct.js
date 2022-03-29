@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import {FacebookShareButton,WhatsappShareButton,WhatsappIcon,FacebookIcon} from "react-share";
-
 import { Grid} from '@mui/material'; 
 // import Header from "../../common/Header";
 import alt_pic from "../../../assets/images/logo512.png";
@@ -10,13 +9,13 @@ import {useParams} from "react-router-dom";
 import {useDispatch,useSelector} from 'react-redux';
 import HelmetMetaData from '../Helmat';
 const ShareProduct = () => {
-    const shareUrl = window.location.href;
+    // const shareUrl = window.location.href;
     const product =  useSelector(state => state.commonReducer.selectedProduct);
     const {id} = useParams();
     const dispatchAction = useDispatch()
     useEffect(()=>{
-        const getProduct = async () => {
-            await dispatchAction(selectedProduct(id));
+        const getProduct =  () => {
+            dispatchAction(selectedProduct(id));
         }
         getProduct();
     },[id,dispatchAction])
@@ -45,7 +44,7 @@ const ShareProduct = () => {
                     <div className="share-blk">
                         <WhatsappShareButton
                                 // url={shareUrl}
-                                url={"https://monumental-muffin-4b1dbb.netlify.app/"}
+                                url={`https://monumental-muffin-4b1dbb.netlify.app${window.location.pathname}`}
                                 title={product.title}
                                 separator="::"
                                 className="Demo__some-network__share-button"
@@ -54,7 +53,7 @@ const ShareProduct = () => {
                         </WhatsappShareButton>
 
                         <FacebookShareButton
-                                url={"https://monumental-muffin-4b1dbb.netlify.app/"}
+                                url={`https://monumental-muffin-4b1dbb.netlify.app${window.location.pathname}`}
                                 // url={shareUrl}
                                 quote="product info"
                                 title={product.title}
@@ -64,13 +63,10 @@ const ShareProduct = () => {
                                 >
                                 <FacebookIcon size={32} round />  
                         </FacebookShareButton>
-
-
                     </div>  
                 </Grid>
            </Grid> 
            }
-            {/* <Header/> */} 
         </>
     )
 }
