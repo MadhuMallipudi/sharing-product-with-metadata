@@ -55,7 +55,7 @@ const ShareProduct = () => {
 
                         <FacebookShareButton
                                 url={"https://monumental-muffin-4b1dbb.netlify.app/"}
-                                // url={"shareUrl"}
+                                // url={shareUrl}
                                 quote="product info"
                                 title={product.title}
                                 hashtag ={ `#${product.title}`}

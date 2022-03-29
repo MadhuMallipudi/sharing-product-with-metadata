@@ -3,11 +3,10 @@ import { Helmet } from "react-helmet";
 // import { useLocation } from "react-router-dom";
 export default function HelmetMetaData(props) {
 //    let location = useLocation();
-  console.log("props",props);
    let currentUrl = window.location.origin + window.location.pathname;
    let quote = props.quote !== undefined ? props.quote : "";
    let title = props.title !== undefined ? props.title : "";
-   let image = props.image !== undefined ? props.image : "https://storage.googleapis.com/cmperstribe_storage_usha/Banner/IMG_3640.JPG";
+   let image = props.image !== undefined ? props.image : "";
    let description = props.description !== undefined ? props.description  : "";
    let hashtag = props.hashtag !== undefined ? props.hashtag : "#product";
 return (
